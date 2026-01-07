@@ -61,6 +61,16 @@ btnAll.onclick = loadVideos;
 
 const displayVideos = (videos) => {
   section.innerHTML = "";
+  if (videos.length === 0) {
+    section.innerHTML = `
+    <div
+        class="col-span-full flex flex-col gap-8 justify-center items-center"
+      >
+        <img class="w-[150px]" src="Icon.png" alt="" />
+        <p class="text-2xl font-bold">Oops!! Sorry, There is no content here</p>
+      </div>
+    `;
+  }
   videos.forEach((video) => {
     const card = document.createElement("div");
     card.innerHTML = `
