@@ -25,8 +25,27 @@
       @theme {
         --color-clifford: #da373d;
         --font-inter: "Inter", sans-serif;
+        --bg-button: #25252533;
       }
     </style>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <nav
+        class="flex justify-between items-center py-6 w-11/12 mx-auto border-b-2 border-[#17171733]"
+      >
+        <div>
+          <img src="Logo.png" alt="" />
+        </div>
+        <div>
+          <button class="btn bg-[var(--bg-button)] font-inter">
+            Sort by view
+          </button>
+        </div>
+        <div>
+          <button class="btn bg-[#FF1F3D] font-inter text-white">Blog</button>
+        </div>
+      </nav>
+    </header>
+  </body>
 </html>
