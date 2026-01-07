@@ -20,8 +20,8 @@ const displayCatagory = (data) => {
     const menu = catagory.category;
     const div = document.createElement("div");
     div.innerHTML = `
-    <button
-          class="btn btn-sm bg-[var(--bg-button)] font-inter text-[#252525B3] hover:bg-[#FF1F3D] hover:text-white"
+    <button id=btn-${catagory.category_id}
+          class="btn btn-sm bg-[var(--bg-button)] font-inter text-[#252525B3] hover:bg-[#FF1F3D] hover:text-white" onclick=loadCatagoryVideos(${catagory.category_id})
         >
           ${menu}
         </button>
@@ -60,6 +60,7 @@ function loadVideos() {
 btnAll.onclick = loadVideos;
 
 const displayVideos = (videos) => {
+  section.innerHTML = "";
   videos.forEach((video) => {
     const card = document.createElement("div");
     card.innerHTML = `
@@ -97,3 +98,10 @@ const displayVideos = (videos) => {
     section.append(card);
   });
 };
+
+function loadCatagoryVideos(id) {
+  const URL = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
+  fetch(URL)
+    .then((response) => response.json())
+    .then((data) => displayVideos(data.category));
+}
