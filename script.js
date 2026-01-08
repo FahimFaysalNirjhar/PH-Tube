@@ -3,6 +3,15 @@ const section = document.querySelector("section");
 const btnAll = document.getElementById("btn-all");
 const search = document.getElementById("search-button");
 
+function showLoader() {
+  document.getElementById("loader").classList.remove("hidden");
+  document.querySelector("section").classList.add("hidden");
+}
+function hideLoader() {
+  document.getElementById("loader").classList.add("hidden");
+  document.querySelector("section").classList.remove("hidden");
+}
+
 function removeActiveClass() {
   const activebtn = document.querySelectorAll(".active");
   activebtn.forEach((btn) => {
@@ -41,7 +50,7 @@ loadButtons();
 
 function loadVideos(searchText) {
   console.log(searchText);
-
+  showLoader();
   const URL = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`;
   console.log(URL);
 
@@ -134,9 +143,11 @@ const displayVideos = (videos) => {
     `;
     section.append(card);
   });
+  hideLoader();
 };
 
 function loadCatagoryVideos(id) {
+  showLoader();
   const URL = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
   fetch(URL)
     .then((response) => response.json())
