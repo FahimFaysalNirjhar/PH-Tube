@@ -175,7 +175,7 @@ const displayModal = (video) => {
   const div = document.querySelector(".details-container");
 
   div.innerHTML = `
-    <div class="card bg-base-100 image-full w-96 shadow-sm">
+    <div class="card bg-base-100 image-full  shadow-sm">
   <figure>
     <img
       src="${video.thumbnail}"
