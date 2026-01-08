@@ -107,9 +107,13 @@ const displayVideos = (videos) => {
             <h2 class="font-bold justify-center text-sm">
              ${video.title}
             </h2>
-            <p class="flex gap-3 text-[#171717B3] text-sm">
+            <p class="flex gap-3 text-[#171717B3] text-sm">a
               ${video.authors[0].profile_name}
-              <img class="w-6" src="icons8-verified-48.png" alt="" />
+              ${
+                video.authors[0].verified === true
+                  ? `<img class="w-6" src="icons8-verified-48.png" alt="" />`
+                  : ``
+              }
             </p>
             <p class="text-[#171717B3] text-sm">${video.others.views} views</p>
           </div>
