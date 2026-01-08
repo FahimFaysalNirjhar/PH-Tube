@@ -2,6 +2,13 @@ const nav = document.getElementById("nav");
 const section = document.querySelector("section");
 const btnAll = document.getElementById("btn-all");
 
+function removeActiveClass() {
+  const activebtn = document.querySelectorAll(".active");
+  activebtn.forEach((btn) => {
+    btn.classList.remove("active");
+  });
+}
+
 function loadButtons() {
   const URL = "https://openapi.programming-hero.com/api/phero-tube/categories";
   fetch(URL)
@@ -35,7 +42,11 @@ function loadVideos() {
   const URL = "https://openapi.programming-hero.com/api/phero-tube/videos";
   fetch(URL)
     .then((response) => response.json())
-    .then((data) => displayVideos(data.videos));
+    .then((data) => {
+      removeActiveClass();
+      btnAll.classList.add("active");
+      displayVideos(data.videos);
+    });
 }
 
 /*{
@@ -113,5 +124,10 @@ function loadCatagoryVideos(id) {
   const URL = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
   fetch(URL)
     .then((response) => response.json())
-    .then((data) => displayVideos(data.category));
+    .then((data) => {
+      removeActiveClass();
+      const clickedButton = document.getElementById(`btn-${id}`);
+      clickedButton.classList.add("active");
+      displayVideos(data.category);
+    });
 }
