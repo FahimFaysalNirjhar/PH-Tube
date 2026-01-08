@@ -1,6 +1,7 @@
 const nav = document.getElementById("nav");
 const section = document.querySelector("section");
 const btnAll = document.getElementById("btn-all");
+const search = document.getElementById("search-button");
 
 function removeActiveClass() {
   const activebtn = document.querySelectorAll(".active");
@@ -38,11 +39,17 @@ const displayCatagory = (data) => {
 };
 loadButtons();
 
-function loadVideos() {
-  const URL = "https://openapi.programming-hero.com/api/phero-tube/videos";
+function loadVideos(searchText) {
+  console.log(searchText);
+
+  const URL = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`;
+  console.log(URL);
+
   fetch(URL)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
+
       removeActiveClass();
       btnAll.classList.add("active");
       displayVideos(data.videos);
@@ -68,7 +75,9 @@ function loadVideos() {
     "description": "Dive into the rhythm of 'Shape of You,' a captivating track that blends pop sensibilities with vibrant beats. Created by Olivia Mitchell, this song has already gained 100K views since its release. With its infectious melody and heartfelt lyrics, 'Shape of You' is perfect for fans looking for an uplifting musical experience. Let the music take over as Olivia's vocal prowess and unique style create a memorable listening journey."
 }*/
 
-btnAll.onclick = loadVideos;
+btnAll.addEventListener("click", () => {
+  loadVideos("");
+});
 
 const displayVideos = (videos) => {
   section.innerHTML = "";
@@ -164,8 +173,12 @@ const displayModal = (video) => {
   <div class="card-body">
     <h2 class="card-title">${video.title}</h2>
     <p>${video.description}</p>
-    
   </div>
 </div>
   `;
+};
+search.onkeyup = (event) => {
+  const search = event.target.value;
+
+  loadVideos(event.target.value);
 };
