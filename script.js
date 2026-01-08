@@ -118,6 +118,9 @@ const displayVideos = (videos) => {
             <p class="text-[#171717B3] text-sm">${video.others.views} views</p>
           </div>
         </div>
+        <button onclick=loadVideoDetails('${
+          video.video_id
+        }') class="btn btn-block">Show Details</button>
       </div>
     `;
     section.append(card);
@@ -135,3 +138,34 @@ function loadCatagoryVideos(id) {
       displayVideos(data.category);
     });
 }
+
+function loadVideoDetails(id) {
+  console.log(id);
+  const URL = `https://openapi.programming-hero.com/api/phero-tube/video/${id}`;
+  fetch(URL)
+    .then((response) => response.json())
+    .then((data) => displayModal(data.video));
+}
+
+const displayModal = (video) => {
+  console.log(video);
+
+  document.getElementById("video_details").showModal();
+  const modalBox = document.querySelectorAll(".modal-box");
+  const div = document.querySelector(".details-container");
+
+  div.innerHTML = `
+    <div class="card bg-base-100 image-full w-96 shadow-sm">
+  <figure>
+    <img
+      src="${video.thumbnail}"
+      alt="Shoes" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">${video.title}</h2>
+    <p>${video.description}</p>
+    
+  </div>
+</div>
+  `;
+};
